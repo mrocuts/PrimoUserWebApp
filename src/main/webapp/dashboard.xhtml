@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Dashboard</ui:define>
+
+    <ui:define name="head">
+           <script type="text/javascript">
+               //<![CDATA[
+               function skinBar() {
+                   this.cfg.shadow = false;
+                   this.cfg.title = '';
+                   this.cfg.seriesColors = ['#3984b8','#7e8dcd'];
+                   this.cfg.grid = {
+                       background: '#ffffff',
+                       borderColor: '#ffffff',
+                       gridLineColor: '#dee4e9',
+                       shadow: false
+                   };
+                   this.cfg.axesDefaults = {
+                       borderWidth: 0.1,
+                       borderColor: 'dce2e7',
+                       rendererOptions: {
+                           textColor: '#757575'
+                       }
+                   };
+                   this.cfg.seriesDefaults = {
+                       shadow: false,
+                       lineWidth: 1,
+                       renderer: $.jqplot.BarRenderer,
+                       markerOptions: {
+                           shadow: false,
+                           size: 7,
+                           style: 'circle'
+                       }
+                   }
+               }
+               //]]>
+           </script>
+           <style type="text/css">
+               .main-content {
+                   padding: 0;
+               }
+           </style>
+       </ui:define>
+
+    <ui:define name="content">
+        <h:form id="PRBoardPrincipalForm">
+            <p:autoUpdate disabled="false" />
+            <div class="ui-g dashboard">
+                <div class="ui-g-5 ui-lg-3 ui-xl-3">
+                        <div class="ui-g overview-box overview-box-0">
+                            <div align="center" class="ui-g-12 button-container">
+                                <p:panelGrid columns="1" styleClass="ui-panelgrid-blank form-group">
+                                    <p:commandLink action="#{CompanyBean.change_status_company()}" update="PRCompanyStatus">
+                                        <p:graphicImage id="PRCompanyStatus" name="images/#{CompanyBean.company_status}.png" library="manhattan-layout" height="80"/>
+                                    </p:commandLink>
+                                    <p:commandButton style="color: #000000; background: transparent" value="#{CompanyBean.company_address}" onclick="PF('addSucursalDlg').show();"/>
+                                </p:panelGrid>
+                                <p:spacer height="40"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-7 ui-lg-3 ui-xl-3">
+                        <div class="ui-g overview-box overview-box-details" style="background: white">
+                            <div align="center" class="ui-g-12 button-container">
+                                <p:panelGrid columns="1" styleClass="ui-panelgrid-blank form-group">
+                                    <p:commandButton style="color: #000000; background: transparent" value="#{CompanyBean.company_name}" onclick="PF('companyregisterdlg').show();"/>
+                                    <p:outputLabel value="Puntaje:"/> <p:rating value="#{CompanyBean.company_rate_primos}" disabled="true" style="color: black"/>
+                                    <p:outputLabel value="Puesto mejores 20 talleres del sector: #{CompanyBean.company_ranking_zone}" style="color: black"/>
+                                    <p:outputLabel value="Puesto mejores 20 talleres de servicio: #{CompanyBean.company_ranking_service}" style="color: black"/>
+                                </p:panelGrid>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-xl-3">
+                        <div class="ui-g overview-box overview-box-details" style="background: white">
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank form-group">
+                                <p:panelGrid columns="3" styleClass="ui-panelgrid-blank form-group">
+                                    <p:graphicImage name="images/refresh_icon.png" library="manhattan-layout" height="20"/>
+                                    <p:outputLabel value="Clientes recurrentes:" style="color: black"/> 
+                                    <p:outputLabel value="#{CompanyBean.company_recurrent_client}" style="color: black"/> 
+                                    <p:graphicImage name="images/in_icon.png" library="manhattan-layout" height="20"/>
+                                    <p:outputLabel value="Clientes nuevos este mes:" style="color: black"/>
+                                    <p:outputLabel value="#{CompanyBean.company_new_client}" style="color: black"/> 
+                                    <p:graphicImage name="images/car_icon.png" library="manhattan-layout" height="20"/>
+                                    <p:outputLabel value="Clientes atendidos:" style="color: black"/>
+                                    <p:outputLabel value="#{CompanyBean.company_client_attend}" style="color: black"/> 
+                                </p:panelGrid>
+                                <p:panelGrid columns="1" styleClass="ui-panelgrid-blank form-group">
+                                    <p:graphicImage name="images/adv_icon.png" library="manhattan-layout" height="80"/>
+                                    <p:outputLabel value="Mi publicidad" style="color: black"/> 
+                                </p:panelGrid>
+                            </p:panelGrid>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-lg-3 ui-xl-3">
+                        <div class="ui-g overview-box overview-box-0">
+                            <div align="center" class="ui-g-12 button-container">
+                                <p:panelGrid columns="1" styleClass="ui-panelgrid-blank form-group">
+                                    <p:commandButton value="Lanzar promociones" style="background: gray;width: 270px; height: 40px;"/>
+                                    <p:commandButton value="Servicios programados" style="background: gray;width: 270px; height: 40px;"/>
+                                    <p:commandButton value="Mi vitrina" style="background: gray;width: 270px; height: 40px;"/>
+                                </p:panelGrid>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

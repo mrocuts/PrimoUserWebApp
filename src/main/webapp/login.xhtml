@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{SystemInfoBean.header_view}</title>
+    </h:head>
+        <h:body style="background: #00BFFF">
+            <br></br>
+            <br></br>
+            <br></br>   
+            <br></br>   
+            <div class="ui-g-12" style="text-align:center">
+                    <p:graphicImage name="images/LogoPrimoPequeno.png" library="manhattan-layout" styleClass="logo" />
+                </div>
+            <div align="center" style="color: #000000">
+                <p style="color: grey; font-style: italic">El vinculo que nos une...</p>
+            </div>
+            <br></br>
+            <div style="background: white; height: 345px;">
+                <div align="center" style="color: #000000">
+                    <h1 style="color: gray">Bienvenido</h1>
+                    <p style="color: gray">Iniciemos</p>
+                    <h:form id="FormLoggin">
+                        <p:growl id="PrincipalGrowl" showDetail="true">
+                            <p:autoUpdate/>
+                        </p:growl>
+                        <h:panelGrid columns="1" cellpadding="5" style="align-items: center;">
+                            <p:inputText value="#{LoginBean.username}" id="PMLoginEmailEntry" placeholder="Correo electronico" required="true" style="width: 270px;"
+                                         requiredMessage="Debe ingresar su correo eletronico"
+                                         validatorMessage="Formato de correo invalido">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+                            <p:password value="#{LoginBean.password}" id="PMLoginPwd" required="true" placeholder="Contraseña" style="width: 270px;"
+                                        requiredMessage="Debe ingresar una contraseña"/>
+                        </h:panelGrid>
+                        <br></br>
+                        <br></br>
+                        <p:commandButton value="Iniciar sesión" style="background: gray;width: 270px; height: 40px;" action="#{LoginBean.login()}" update="PrincipalGrowl"/>
+                    </h:form>
+                    <h:form id="FormRegisterButton">
+                        <br></br>
+                        <p:commandLink value="¿No tienes una cuenta? Registrate!" action="/registerPage.xhtml?faces-redirect=true"/>
+                    </h:form>
+                    <h:form id="FormRecuperarButton">
+                        <br></br>
+                        <p:commandLink value="Olvidó su Contraseña" action="/recuperarContrasena.xhtml?faces-redirect=true"/>
+                    </h:form>
+                </div>
+            </div>
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="manhattan-layout" />
+    </h:body>
+</html>

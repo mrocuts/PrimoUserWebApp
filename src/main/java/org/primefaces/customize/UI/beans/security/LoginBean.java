@@ -5,7 +5,9 @@
  */
 package org.primefaces.customize.UI.beans.security;
 
+import com.primo.model.Garaje;
 import com.primo.model.Usuario;
+import com.primo.ws.garaje.GarajeWSClient;
 import com.primo.ws.user.UserWSClient;
 import java.math.BigInteger;
 import java.util.logging.Level;
@@ -86,9 +88,13 @@ public class LoginBean {
             myUsuario.setStrPassword(password);
             myUsuario.setIntTipoUsuario(new BigInteger("2"));
             Usuario myUsuarioTemp = UserWSClient.login(myUsuario);
+            HttpSession mySession = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             
             if(myUsuarioTemp != null){
-                UserSessionManager.getInstance().connectUser(myUsuarioTemp, (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true));
+                //Traer la información del Garaje
+                Garaje myGaraje = GarajeWSClient.getGarageUser(myUsuarioTemp.getIdUsuario());
+                UserSessionManager.getInstance().connectUser(myUsuarioTemp, mySession);
+                mySession.setAttribute("myGaraje", myGaraje);
                 UIMessageManagement.putInfoMessage("Bienvenido "+username);
                 return "/dashboard.xhtml?faces-redirect=true";
             }else{

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{SystemInfoBean.header_view}</title>
+    </h:head>
+
+    <h:body style="background: #00BFFF">
+        <h:form id="ReturnDashboard">
+            <p:commandButton icon="fa fa-arrow-left" action="/dashboard.xhtml?faces-redirect=true"/>
+        </h:form>
+        <h:form id="FormGaraje">
+            <p:growl id="RegisterGrowl" showDetail="true">
+                <p:autoUpdate/>
+            </p:growl>
+            <div style="height: 20px;"></div>
+            <p:fieldset legend="GARAJE" style="margin-bottom:20px">
+                <br></br>
+                <br></br>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="Tienes #{GarajeBean.myListVehiculo.size()} vehículos en el Garaje"/>
+                </h:panelGrid>
+                <br></br>
+                <br></br>
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <c:if test="#{GarajeBean.myListVehiculo.size() eq 0}">
+                                <p:outputLabel value="Vehiculo" for="clVehiculo1"/>
+                                <br/>
+                                <p:commandLink id="clVehiculo1" action="/vehiculo/registerVehicle.xhtml?faces-redirect=true">
+                                    <h:graphicImage name="images/free.png" library="manhattan-layout" height="50"/>
+                                </p:commandLink>
+                            </c:if>
+                            <c:if test="#{GarajeBean.myListVehiculo.size() gt 0}">
+                                <p:outputLabel value="Vehiculo" for="clVehiculo1"/>
+                                <br/>
+                                <p:commandLink id="clVehiculo1" action="#{GarajeBean.cargarVehiculo(GarajeBean.myListVehiculo.get(0))}">
+                                    <h:graphicImage name="images/car.jpg" library="manhattan-layout" height="50"/>
+                                </p:commandLink>
+                            </c:if>
+                        </td>
+                        <td>
+                            <p:outputLabel value="Vehiculo" for="clVehiculo2"/>
+                            <br/>
+                            <p:commandLink id="clVehiculo2" action="garaje/garaje.xhtml?faces-redirect=true">
+                                <h:graphicImage name="images/candado.jpg" library="manhattan-layout" height="50"/>
+                            </p:commandLink>
+                        </td>
+                        <td>
+                            <p:outputLabel value="Vehiculo" for="clVehiculo3"/>
+                            <br/>
+                            <p:commandLink id="clVehiculo3" action="garaje/garaje.xhtml?faces-redirect=true">
+                                <h:graphicImage name="images/candado.jpg" library="manhattan-layout" height="50"/>
+                            </p:commandLink>
+                        </td>
+                        <td>
+                            <p:outputLabel value="Vehiculo" for="clVehiculo4"/>
+                            <br/>
+                            <p:commandLink id="clVehiculo4" action="garaje/garaje.xhtml?faces-redirect=true">
+                                <h:graphicImage name="images/candado.jpg" library="manhattan-layout" height="50"/>
+                            </p:commandLink>
+                        </td>
+                    </tr>
+                </table>    
+                <br></br>
+            </p:fieldset>
+            <div class="ui-g-12" style="text-align:center">
+                    <p:graphicImage name="images/LogoPrimoPequeno.png" library="manhattan-layout" styleClass="logo" />
+            </div>
+        </h:form>
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="manhattan-layout" />
+    </h:body>
+</html>

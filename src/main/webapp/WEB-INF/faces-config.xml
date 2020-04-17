@@ -122,4 +122,11 @@
             <to-view-id>/registro/cambiarContrasenaEmail.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/garaje/garaje.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>modificarVehiculo</from-outcome>
+            <to-view-id>vehiculo/modifyVehicle.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

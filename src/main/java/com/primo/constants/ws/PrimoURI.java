@@ -24,4 +24,11 @@ public class PrimoURI {
     public final static String REG_DIR_WS="http://localhost:8080/direccion";
     public final static String REG_SUC_DIR_WS="http://localhost:8080/sucursalDireccion";
     public final static String REG_CONT_WS="http://localhost:8080/contacto";
+    public final static String REG_DIR_GR="http://localhost:8080/garaje";
+    public final static String REG_DIR_VH="http://localhost:8080/vehiculo";
+    public final static String REG_MOD_VH="http://localhost:8080/actualizarVehiculo";
+    public final static String REG_SUB_VH="http://localhost:8080/subirAlVehiculo/";
+    public final static String REG_DIR_TVH="http://localhost:8080/tipoVehiculo";
+    public final static String REG_DIR_MAR="http://localhost:8080/marca";
+    public final static String REG_DIR_MOD="http://localhost:8080/modelo";
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{SystemInfoBean.header_view}</title>
+    </h:head>
+
+    <h:body style="background: #00BFFF">
+        <h:form id="ReturnGarage">
+            <p:commandButton icon="fa fa-arrow-left" action="/garaje/garaje.xhtml?faces-redirect=true"/>
+        </h:form>
+        <h:form id="FormRegister">
+            <p:growl id="RegisterGrowl" showDetail="true">
+                <p:autoUpdate/>
+            </p:growl>
+            <br></br>   
+            <div class="ui-g-12" style="text-align:center">
+                    <p:graphicImage name="images/LogoPrimoPequeno.png" library="manhattan-layout" styleClass="logo" />
+            </div>
+            <br></br>
+            <br></br>
+            <p:fieldset legend="REGISTRO VEHICULO" style="margin-bottom:20px">
+                <br></br>
+                <br></br>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="somTipoVehiculo" value="Tipo de Vehículo:"/>
+                    <p:selectOneMenu id="somTipoVehiculo"  value="#{VehiculoBean.myVehiculo.myTipoVehiculo.idTipoVehiculo}">
+                        <p:ajax listener="#{VehiculoBean.obtenerListaMarca()}" update="somMarca"/>
+                        <f:selectItem itemLabel="Seleccione" itemValue="0"></f:selectItem>
+                        <f:selectItems value="#{VehiculoBean.obtenerListaTipoVehiculo()}"></f:selectItems>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="somMarca" value="Marca:"/>
+                    <p:selectOneMenu id="somMarca" value="#{VehiculoBean.myMarca.idMarca}">
+                        <p:ajax listener="#{VehiculoBean.obtenerListaModelo()}" update="somModelo"/>
+                        <f:selectItem itemLabel="Seleccione" itemValue="0"></f:selectItem>
+                        <f:selectItems value="#{VehiculoBean.myListMarca}"></f:selectItems>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="somModelo" value="Modelo:"/>
+                    <p:selectOneMenu id="somModelo" value="#{VehiculoBean.myVehiculo.myModelo.idModelo}">
+                        <f:selectItem itemLabel="Seleccione" itemValue="0"></f:selectItem>
+                        <f:selectItems value="#{VehiculoBean.myListModelo}"></f:selectItems>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Año:" for="numAnio"/>
+                    <p:inputNumber id="numAnio" placeholder="Año" value="#{VehiculoBean.dblAnio}" size="4" decimalPlaces="0"/>
+                    <p:outputLabel value="Placa:" for="txtPlaca"/>
+                    <p:inputTextarea id="txtPlaca" placeholder="Placa" value="#{VehiculoBean.myVehiculo.strPlaca}"/>
+                    <p:outputLabel value="Descripción:" for="txtDescripcion"/>
+                    <p:inputTextarea id="txtDescripcion" placeholder="Descripción del Vehiculo" value="#{VehiculoBean.myVehiculo.strObservacion}"/>
+                    <p:outputLabel value="Serial:" for="txtSerial"/>
+                    <p:inputText id="txtSerial" placeholder="Serial" value="#{VehiculoBean.myVehiculo.strSerial}"/>
+                    <p:outputLabel value="Color:" for="txtColor"/>
+                    <p:inputText id="txtColor" placeholder="Color" value="#{VehiculoBean.myVehiculo.strColor}"/>
+                    <p:outputLabel value="Puertas:" for="numPuertas"/>
+                    <p:inputNumber id="numPuertas" placeholder="Puertas" value="#{VehiculoBean.dblPuertas}" size="1" decimalPlaces="0"/>
+                    <p:outputLabel value="Motor:" for="txtMotor"/>
+                    <p:inputText id="txtMotor" placeholder="Motor" value="#{VehiculoBean.myVehiculo.strMotor}"/>
+                    <p:outputLabel value="Transmisión:" for="txtTransmision"/>
+                    <p:inputText id="txtTransmision" placeholder="Transmisión" value="#{VehiculoBean.myVehiculo.strTransmision}"/>
+                </h:panelGrid>
+                <br></br>
+                <div align="center" class="ui-g-12 button-container">
+                    <p:commandButton id="RegisterButton" action="#{VehiculoBean.registrarVehiculo()}" value="REGISTRAR VEHICULO" style="background: #00758f;width: 270px; height: 50px;" update="RegisterGrowl"/>
+                </div>
+            </p:fieldset>
+        </h:form>
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="manhattan-layout" />
+    </h:body>
+</html>

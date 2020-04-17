@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{SystemInfoBean.header_view}</title>
+    </h:head>
+
+    <h:body style="background: #00BFFF">
+        <h:form id="ReturnGarage">
+            <p:commandButton icon="fa fa-arrow-left" action="/garaje/garaje.xhtml?faces-redirect=true"/>
+        </h:form>
+        <h:form id="FormRegister">
+            <p:growl id="UpdateGrowl" showDetail="true">
+                <p:autoUpdate/>
+            </p:growl>
+            <br></br>   
+            <div class="ui-g-12" style="text-align:center">
+                    <p:graphicImage name="images/LogoPrimoPequeno.png" library="manhattan-layout" styleClass="logo" />
+            </div>
+            <br></br>
+            <br></br>
+            <p:fieldset legend="ACTUALIZAR VEHICULO" style="margin-bottom:20px">
+                <br></br>
+                <br></br>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="olTipoVehiculo" value="Tipo de Vehículo:"/>
+                    <p:outputLabel id="olTipoVehiculo" value="#{VehiculoBean.myVehiculoModificar.myTipoVehiculo.strDescripcion}"/>
+                    <p:outputLabel for="olModelo" value="Modelo:"/>
+                    <p:outputLabel id="olModelo" value="#{VehiculoBean.myVehiculoModificar.myModelo.strDescripcion}"/>
+                    <p:outputLabel value="Año:" for="olAnio"/>
+                    <p:outputLabel id="olAnio" value="#{VehiculoBean.myVehiculoModificar.intAnio}"/>
+                    <p:outputLabel value="Placa:" for="olPlaca"/>
+                    <p:outputLabel id="olPlaca" value="#{VehiculoBean.myVehiculoModificar.strPlaca}"/>
+                    <p:outputLabel value="Descripción:" for="txtDescripcion"/>
+                    <p:inputTextarea id="txtDescripcion" placeholder="Descripción del Vehiculo" value="#{VehiculoBean.myVehiculoModificar.strObservacion}"/>
+                    <p:outputLabel value="Serial:" for="txtSerial"/>
+                    <p:inputText id="txtSerial" placeholder="Serial" value="#{VehiculoBean.myVehiculoModificar.strSerial}"/>
+                    <p:outputLabel value="Color:" for="txtColor"/>
+                    <p:inputText id="txtColor" placeholder="Color" value="#{VehiculoBean.myVehiculoModificar.strColor}"/>
+                    <p:outputLabel value="Puertas:" for="numPuertas"/>
+                    <p:inputNumber id="numPuertas" placeholder="Puertas" value="#{VehiculoBean.myVehiculoModificar.intPuertas}" size="1" decimalPlaces="0"/>
+                    <p:outputLabel value="Motor:" for="txtMotor"/>
+                    <p:inputText id="txtMotor" placeholder="Motor" value="#{VehiculoBean.myVehiculoModificar.strMotor}"/>
+                    <p:outputLabel value="Transmisión:" for="txtTransmision"/>
+                    <p:inputText id="txtTransmision" placeholder="Transmisión" value="#{VehiculoBean.myVehiculoModificar.strTransmision}"/>
+                </h:panelGrid>
+                <br></br>
+                <div align="center" class="ui-g-6 button-container">
+                    <p:commandButton id="UpdateButton" action="#{VehiculoBean.actualizarVehiculo()}" value="ACTUALIZAR VEHICULO" style="background: #00758f;width: 135px; height: 50px;" update="UpdateGrowl"/>
+                </div>
+                <div align="center" class="ui-g-6 button-container">
+                    <p:commandButton id="UpButton" action="#{VehiculoBean.subirAlVehiculo()}" value="SUBIR AL VEHICULO" style="background: #00758f;width: 135px; height: 50px;" update="UpdateGrowl"/>
+                </div>
+            </p:fieldset>
+        </h:form>
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="manhattan-layout" />
+    </h:body>
+</html>
